@@ -1,0 +1,121 @@
+.calc-wrap {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --key-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --danger: #e35353;
+  --mono: ui-monospace, Consolas, "SFMono-Regular", monospace;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .calc-wrap {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --key-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --danger: #f08080;
+  }
+}
+
+.calc {
+  width: 320px;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: var(--bg);
+}
+
+.calc-display {
+  font-family: var(--mono);
+  text-align: right;
+  padding: 18px 14px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  background: var(--key-bg);
+  color: var(--text-h);
+  overflow-x: auto;
+}
+
+.calc-expr {
+  font-size: 13px;
+  color: var(--text);
+  min-height: 16px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.calc-value {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.calc-key {
+  font-family: var(--mono);
+  font-size: 16px;
+  padding: 16px 0;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: var(--key-bg);
+  color: var(--text-h);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.05s;
+}
+
+.calc-key:hover {
+  border-color: var(--accent-border);
+}
+
+.calc-key:active {
+  transform: scale(0.96);
+}
+
+.calc-key:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.calc-key.op {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.calc-key.equals {
+  background: var(--accent);
+  color: #fff;
+  grid-row: span 2;
+}
+
+.calc-key.clear {
+  color: var(--danger);
+}
+
+.calc-key.zero {
+  grid-column: span 2;
+}
