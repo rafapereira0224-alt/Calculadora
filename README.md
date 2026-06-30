@@ -1,16 +1,20 @@
-# React + Vite
+# Calculadora Simples 🧮
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Este é um projeto de calculadora funcional desenvolvido durante meus estudos de programação. O foco principal foi praticar a lógica de JavaScript, manipulação do DOM e estruturação de layouts com CSS.
 
-Currently, two official plugins are available:
+## 🚀 Como acessar
+Você pode testar a calculadora online aqui:
+(https://github.com/rafapereira0224-alt/Calculadora)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tecnologias Utilizadas
+* **HTML5**: Estrutura da calculadora.
+* **CSS3**: Estilização e layout.
+* **JavaScript**: Lógica de cálculo e interatividade.
 
-## React Compiler
+## ✨ Funcionalidades
+* Operações matemáticas básicas (soma, subtração, multiplicação e divisão).
+* Interface responsiva.
+* [Opcional: adicione algo que você fez de diferente].
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+---
+*Projeto desenvolvido como parte da minha jornada em desenvolvimento web.*
