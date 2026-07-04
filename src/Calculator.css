@@ -1,15 +1,32 @@
-.calc-wrap {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --key-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+:root {
+  --text: #6b6d75;
+  --text-h: #0a0a0c;
+  --bg: #f2f2f4;
+  --card-bg: #ffffff;
+  --border: #e2e2e5;
+  --key-bg: #f0f0f0;
+  --accent: #6b7280;
+  --accent-bg: rgba(107, 114, 128, 0.12);
+  --accent-border: rgba(107, 114, 128, 0.5);
   --danger: #e35353;
   --mono: ui-monospace, Consolas, "SFMono-Regular", monospace;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+html[data-theme="dark"] {
+  --text: #c1c5cf;
+  --text-h: #ffffff;
+  --bg: #000000;
+  --card-bg: #1e1e22;
+  --border: #4a4a54;
+  --key-bg: #34343c;
+  --accent: #a5adbd;
+  --accent-bg: rgba(165, 173, 189, 0.25);
+  --accent-border: rgba(165, 173, 189, 0.8);
+  --danger: #ff8a8a;
+}
+
+.calc-wrap {
   font-family: var(--sans);
   color: var(--text);
   background: var(--bg);
@@ -17,42 +34,67 @@
   justify-content: center;
   padding: 32px 16px;
   box-sizing: border-box;
-  min-height: 100%;
+  width: 100%;
+  transition: background-color 0.25s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  .calc-wrap {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --key-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --danger: #f08080;
-  }
+.calc-theme-toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--key-bg);
+  color: var(--text-h);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.calc-theme-toggle:hover {
+  border-color: var(--accent-border);
+}
+
+.calc-theme-toggle:active {
+  transform: scale(0.92);
 }
 
 .calc {
+  position: relative;
   width: 320px;
   max-width: 100%;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 20px;
   box-sizing: border-box;
-  background: var(--bg);
+  background: var(--card-bg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 24px 56px -16px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .calc-display {
   font-family: var(--mono);
   text-align: right;
-  padding: 18px 14px;
-  margin-bottom: 16px;
-  border-radius: 10px;
+  padding: 22px 16px 16px;
+  margin-bottom: 18px;
+  border-radius: 14px;
   background: var(--key-bg);
   color: var(--text-h);
   overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .calc-expr {
@@ -61,11 +103,12 @@
   min-height: 16px;
   white-space: nowrap;
   overflow-x: auto;
+  transition: color 0.2s ease;
 }
 
 .calc-value {
-  font-size: 32px;
-  font-weight: 500;
+  font-size: clamp(28px, 8vw, 36px);
+  font-weight: 600;
   letter-spacing: -0.5px;
   white-space: nowrap;
 }
@@ -78,22 +121,28 @@
 
 .calc-key {
   font-family: var(--mono);
-  font-size: 16px;
-  padding: 16px 0;
-  border-radius: 10px;
+  font-size: 17px;
+  padding: 18px 0;
+  border-radius: 12px;
   border: 2px solid transparent;
   background: var(--key-bg);
   color: var(--text-h);
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.05s;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.08s ease;
 }
 
 .calc-key:hover {
   border-color: var(--accent-border);
+  background: color-mix(in srgb, var(--key-bg) 85%, var(--accent) 15%);
 }
 
 .calc-key:active {
-  transform: scale(0.96);
+  transform: scale(0.94);
 }
 
 .calc-key:focus-visible {
@@ -106,14 +155,32 @@
   color: var(--accent);
 }
 
+.calc-key.op:hover {
+  background: color-mix(in srgb, var(--accent-bg) 70%, var(--accent) 30%);
+}
+
 .calc-key.equals {
   background: var(--accent);
   color: #fff;
   grid-row: span 2;
+  border-color: transparent;
+}
+
+.calc-key.equals:hover {
+  filter: brightness(1.08);
+  border-color: transparent;
+}
+
+.calc-key.equals:active {
+  filter: brightness(0.96);
 }
 
 .calc-key.clear {
   color: var(--danger);
+}
+
+.calc-key.clear:hover {
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
 }
 
 .calc-key.zero {

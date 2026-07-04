@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Calculator.css";
 
 const OPS = {
@@ -20,9 +20,18 @@ export default function Calculator() {
   const [stored, setStored] = useState(null);
   const [operator, setOperator] = useState(null);
   const [overwrite, setOverwrite] = useState(true);
+  const [theme, setTheme] = useState("light");
 
   const exprText =
     stored !== null && operator ? `${stored} ${operator}` : "";
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }
 
   function inputDigit(d) {
     if (overwrite) {
@@ -76,6 +85,15 @@ export default function Calculator() {
   return (
     <div className="calc-wrap">
       <div className="calc">
+        <button
+          type="button"
+          className="calc-theme-toggle"
+          onClick={toggleTheme}
+          aria-label={theme === "light" ? "Ativar modo escuro" : "Ativar modo claro"}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
         <div className="calc-display">
           <div className="calc-expr">{exprText}</div>
           <div className="calc-value">{display}</div>
